@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="about_margin">8dp</dimen>
+    <dimen name="layout_height">200dp</dimen>
+    <dimen name="margin_dialog_about">5dp</dimen>
+    <dimen name="padding_dialog_about">25dp</dimen>
+</resources>

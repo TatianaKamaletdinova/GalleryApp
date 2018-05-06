@@ -1,0 +1,26 @@
+<resources>
+
+    <string name="app_name">Рыжая галерея</string>
+    <string name="search_text">Поиск изображений</string>
+    <string name="about">О приложении</string>
+    <string name="ok">ОК</string>
+
+
+    <string name="result_query"> Ничего не нашлось</string>
+    <string name="network_error">Невозможно подключиться к Интернету. Проверьте свою связь</string>
+    <string name="server_error">Не удалось найти сервер. Повторите попытку через некоторое время</string>
+    <string name="parse_error">Ошибка обработки. Повторите попытку через некоторое время</string>
+    <string name="timeout_error">Время соединения вышло! Пожалуйста, проверьте подключение к интернету.</string>
+    <string name="no_results">Нет результатов</string>
+    <string name="no_images">Изображения отсутствуют</string>
+    <string name="message">Введите в строке поиска запрос необходимого изображения</string>
+
+    <string name="title_about">Приложение: галерея</string>
+    <string name="author_about">by Tatyana Bazhanova</string>
+    <string name="email_title_about">E-Mail:</string>
+    <string name="email_about">kamaltatyana@gmail.com</string>
+
+    <string name="chooser_title">Открыть с помощью..</string>
+    <string name="image_parse">Изображение</string>
+
+</resources>
