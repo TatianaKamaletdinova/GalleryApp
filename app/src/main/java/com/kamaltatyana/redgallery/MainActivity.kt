@@ -1,4 +1,4 @@
-package com.kamaltatyana.yandextestapp
+package com.kamaltatyana.redgallery
 
 import android.content.Intent
 import android.os.Bundle
@@ -18,9 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.*
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.kamaltatyana.yandextestapp.MainActivity
-import com.kamaltatyana.yandextestapp.adapter.ImageAdapter
-import com.kamaltatyana.yandextestapp.pojo.Images
+import com.kamaltatyana.redgallery.adapter.ImageAdapter
+import com.kamaltatyana.redgallery.pojo.Images
 import org.json.JSONException
 import java.util.*
 

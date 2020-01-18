@@ -1,4 +1,4 @@
-package com.kamaltatyana.yandextestapp.adapter
+package com.kamaltatyana.redgallery.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.kamaltatyana.yandextestapp.R
-import com.kamaltatyana.yandextestapp.adapter.ImageAdapter.MyViewHolder
-import com.kamaltatyana.yandextestapp.pojo.Images
+import com.kamaltatyana.redgallery.R
+import com.kamaltatyana.redgallery.adapter.ImageAdapter.MyViewHolder
+import com.kamaltatyana.redgallery.pojo.Images
 import java.util.*
 
 class ImageAdapter(private val mContext: Context, private val mImagesArrayList: ArrayList<Images>) : RecyclerView.Adapter<MyViewHolder>() {
