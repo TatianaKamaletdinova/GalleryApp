@@ -1,4 +1,4 @@
-package com.kamaltatyana.yandextestapp;
+package com.kamaltatyana.redgallery;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.kamaltatyana.yandextestapp", appContext.getPackageName());
+        assertEquals("com.kamaltatyana.redgallery", appContext.getPackageName());
     }
 }

@@ -1,4 +1,4 @@
-package com.kamaltatyana.yandextestapp;
+package com.kamaltatyana.redgallery;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.kamaltatyana.yandextestapp
+package com.kamaltatyana.redgallery
 
 import android.os.Bundle
 import android.view.View
