@@ -1,7 +1,7 @@
 package com.kamaltatyana.yandextestapp;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
@@ -42,9 +42,9 @@ public class ImageActivity extends AppCompatActivity {
          **/
         Glide.with(this)
                 .load(imageUrl)
-                .asBitmap()
-                .error(R.drawable.images_error)
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                //.asBitmap()
+                //.error(R.drawable.images_error)
+                //.diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(imageView);
 
     }
