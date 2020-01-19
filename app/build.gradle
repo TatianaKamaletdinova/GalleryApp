@@ -1,7 +1,9 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+
+apply plugin: 'kotlin-allopen'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -19,6 +21,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -31,17 +39,27 @@ dependencies {
     implementation deps.support.recyclerview
     implementation deps.support.cardview
     implementation deps.support.design
-    implementation deps.glide.runtime
 
+    implementation deps.glide.runtime
     implementation deps.volley
     implementation deps.constraint_layout
     implementation deps.picasso
     implementation deps.photoView
     implementation deps.slidableactivity
 
+    implementation deps.dagger.runtime
+    implementation deps.dagger.android
+    implementation deps.dagger.android_support
+
     implementation deps.retrofit.runtime
     implementation deps.retrofit.gson
-    
+
+    implementation deps.navigation.fragment_ktx
+
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt deps.dagger.android_support_compiler
+    kapt deps.dagger.compiler
+
     testImplementation deps.junit
 
     androidTestImplementation deps.atsl.ext_junit

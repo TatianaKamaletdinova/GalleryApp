@@ -15,11 +15,16 @@ versions.atsl_junit = "1.1.1"
 versions.junit = "4.12"
 versions.espresso = "3.2.0"
 versions.retrofit = "2.3.0"
+versions.dagger = "2.16"
+versions.navigation = "2.2.0-alpha01"
 
 def kotlin = [:]
 kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+kotlin.test = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
 kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+kotlin.allopen = "org.jetbrains.kotlin:kotlin-allopen:$versions.kotlin"
 deps.kotlin = kotlin
+
 deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
 ext.deps = deps
 
@@ -56,6 +61,14 @@ deps.photoView = "com.github.chrisbanes:PhotoView:$versions.photoView"
 deps.slidableactivity = "com.r0adkll:slidableactivity:$versions.slidableactivity"
 deps.junit = "junit:junit:$versions.junit"
 
+def dagger = [:]
+dagger.runtime = "com.google.dagger:dagger:$versions.dagger"
+dagger.android = "com.google.dagger:dagger-android:$versions.dagger"
+dagger.android_support = "com.google.dagger:dagger-android-support:$versions.dagger"
+dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger"
+dagger.android_support_compiler = "com.google.dagger:dagger-android-processor:$versions.dagger"
+deps.dagger = dagger
+
 def atsl = [:]
 atsl.ext_junit = "androidx.test.ext:junit:$versions.atsl_junit"
 deps.atsl = atsl
@@ -63,6 +76,16 @@ deps.atsl = atsl
 def espresso = [:]
 espresso.core = "androidx.test.espresso:espresso-core:$versions.espresso"
 deps.espresso = espresso
+
+def navigation = [:]
+navigation.runtime = "androidx.navigation:navigation-runtime:$versions.navigation"
+navigation.runtime_ktx = "androidx.navigation:navigation-runtime-ktx:$versions.navigation"
+navigation.fragment = "androidx.navigation:navigation-fragment:$versions.navigation"
+navigation.fragment_ktx = "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
+navigation.ui = "androidx.navigation:navigation-ui:$versions.navigation"
+navigation.ui_ktx = "androidx.navigation:navigation-ui-ktx:$versions.navigation"
+navigation.safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.navigation"
+deps.navigation = navigation
 
 static def addRepos(RepositoryHandler handler) {
     handler.maven { url "https://jitpack.io" }

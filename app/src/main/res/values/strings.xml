@@ -22,5 +22,8 @@
 
     <string name="chooser_title">Открыть с помощью..</string>
     <string name="image_parse">Изображение</string>
+    <string name="retry">Повторить</string>
+    <string name="unknown_error">Нет результатов</string>
+
 
 </resources>
