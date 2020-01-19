@@ -1,4 +1,4 @@
-package com.kamaltatyana.redgallery
+package com.kamaltatyana.redgallery.view.about
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.text.Html
 import android.view.View
 import android.widget.TextView
+import com.kamaltatyana.redgallery.R
 
 class AboutFragment : DialogFragment(), View.OnClickListener {
     override fun onCreateDialog(savedInstanceState: Bundle): Dialog {

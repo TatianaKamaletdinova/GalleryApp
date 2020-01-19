@@ -9,7 +9,7 @@
     android:background="@color/colorAccent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.kamaltatyana.redgallery.ImageActivity">
+    tools:context="com.kamaltatyana.redgallery.view.image.ImageActivity">
 
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/image_view_detail"

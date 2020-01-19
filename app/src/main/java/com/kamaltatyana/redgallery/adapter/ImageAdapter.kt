@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kamaltatyana.redgallery.R
 import com.kamaltatyana.redgallery.adapter.ImageAdapter.MyViewHolder
-import com.kamaltatyana.redgallery.pojo.Images
+import com.kamaltatyana.redgallery.model.Images
 import java.util.*
 
 class ImageAdapter(private val mContext: Context, private val mImagesArrayList: ArrayList<Images>) : RecyclerView.Adapter<MyViewHolder>() {
