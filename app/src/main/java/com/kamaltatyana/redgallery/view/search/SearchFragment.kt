@@ -89,6 +89,11 @@ class SearchFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
+        initSearchInputListener()
+    }
+
+    private fun initSearchInputListener() {
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -116,8 +121,12 @@ class SearchFragment : Fragment(),
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         mSearchQuery = query
-        //parseJSON(query, null)
+        doSearch(query)
         return false
+    }
+
+    private fun doSearch(query: String?) {
+        searchViewModel.setQuery(query)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean { // Операции для выбранного пункта меню
