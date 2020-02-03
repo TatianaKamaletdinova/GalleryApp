@@ -38,22 +38,19 @@ class SearchFragment : Fragment(),
     lateinit var viewModelFactory: ViewModelProvider.Factory
     val searchViewModel: SearchViewModel by viewModels { viewModelFactory}
 
-    var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
-    var binding by autoCleared<SearchFragmentBinding>()
+    private var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
+    private var binding by autoCleared<SearchFragmentBinding>()
 
-    var listState: Parcelable? = null
     private var mSearchQuery: String? = null //Строка запроса изображения
     private var mImagesArrayList: ArrayList<Images>? = null
     private var mRecyclerView: RecyclerView? = null
     private var mLayoutManager: RecyclerView.LayoutManager? = null
     private var mImageAdapter: ImageAdapter? = null
-    private var views: View? = null
 
     private var searchView: SearchView? = null
 
     private var mHandler: Handler? = null
     private var mMenuItem: MenuItem? = null
-    private var request: JsonObjectRequest? = null
     private var mTitleText: TextView? = null
     private var mImage: ImageView? = null
 

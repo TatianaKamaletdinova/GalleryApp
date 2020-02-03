@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.kamaltatyana.redgallery.repository.ImageRepository
 import javax.inject.Inject
 
-class SearchViewModel @Inject constructor(imageRepository: ImageRepository ) : ViewModel()
+class SearchViewModel @Inject constructor(
+    private val imageRepository: ImageRepository
+) : ViewModel()
 {
     private val _query = MutableLiveData<String>()
     val query : LiveData<String> = _query
@@ -16,5 +18,6 @@ class SearchViewModel @Inject constructor(imageRepository: ImageRepository ) : V
             return
         }
         _query.value = input
+         val result = imageRepository.search(input!!)
     }
 }

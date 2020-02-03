@@ -1,7 +1,7 @@
 package com.kamaltatyana.redgallery.di
 
-import android.app.Application
 import com.kamaltatyana.redgallery.api.PixabayService
+import com.kamaltatyana.redgallery.util.LiveDataCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -15,9 +15,9 @@ class AppModule {
     @Provides
     fun provideGithubService(): PixabayService {
         return Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
+                .baseUrl("https://pixabay.com/")
                 .addConverterFactory(GsonConverterFactory.create())
-                //.addCallAdapterFactory(LiveDataCallAdapterFactory())
+                .addCallAdapterFactory(LiveDataCallAdapterFactory())
                 .build()
                 .create(PixabayService::class.java)
     }
