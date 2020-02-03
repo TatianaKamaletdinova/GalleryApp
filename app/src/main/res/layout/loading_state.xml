@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="com.kamaltatyana.redgallery.network.Resource" />
-        <import type="com.kamaltatyana.redgallery.network.Status" />
+        <import type="com.kamaltatyana.redgallery.vo.Resource" />
+        <import type="com.kamaltatyana.redgallery.vo.Status" />
         <variable
             name="resource"
             type="Resource" />
