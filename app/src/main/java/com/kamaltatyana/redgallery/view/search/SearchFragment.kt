@@ -2,83 +2,75 @@ package com.kamaltatyana.redgallery.view.search
 
 import android.os.Bundle
 import android.os.Handler
-import android.os.Parcelable
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.RequestQueue
-import com.android.volley.toolbox.JsonObjectRequest
+import com.kamaltatyana.redgallery.AppExecutors
 import com.kamaltatyana.redgallery.R
-import com.kamaltatyana.redgallery.adapter.ImageAdapter
 import com.kamaltatyana.redgallery.binding.FragmentDataBindingComponent
 import com.kamaltatyana.redgallery.databinding.SearchFragmentBinding
 import com.kamaltatyana.redgallery.di.Injectable
-import com.kamaltatyana.redgallery.model.Images
+import com.kamaltatyana.redgallery.ui.ImageListAdapter
 import com.kamaltatyana.redgallery.util.autoCleared
 import com.kamaltatyana.redgallery.view.main.MainActivity
 import javax.inject.Inject
 
 class SearchFragment : Fragment(),
-        Injectable,
-        SearchView.OnQueryTextListener
-//ImageAdapter.OnItemClickListener,
-
+    Injectable,
+    SearchView.OnQueryTextListener
 {
-   @Inject
+    @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    val searchViewModel: SearchViewModel by viewModels { viewModelFactory}
+
+    private val searchViewModel: SearchViewModel by viewModels { viewModelFactory }
+
+    @Inject
+    lateinit var appExecutors: AppExecutors
 
     private var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
+
     private var binding by autoCleared<SearchFragmentBinding>()
 
+    var adapter by autoCleared<ImageListAdapter>()
+
     private var mSearchQuery: String? = null //Строка запроса изображения
-    private var mImagesArrayList: ArrayList<Images>? = null
-    private var mRecyclerView: RecyclerView? = null
-    private var mLayoutManager: RecyclerView.LayoutManager? = null
-    private var mImageAdapter: ImageAdapter? = null
-
     private var searchView: SearchView? = null
-
     private var mHandler: Handler? = null
     private var mMenuItem: MenuItem? = null
     private var mTitleText: TextView? = null
     private var mImage: ImageView? = null
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 
         binding = DataBindingUtil.inflate(
-                inflater,
-                R.layout.search_fragment,
-                container,
-                false,
-                dataBindingComponent
+            inflater,
+            R.layout.search_fragment,
+            container,
+            false,
+            dataBindingComponent
         )
+
         mTitleText = binding.emptyTitleText
         mImage = binding.image
         val toolbar = binding.toolbar
         (context as MainActivity).setSupportActionBar(toolbar)
         mHandler = Handler()
-        if (savedInstanceState != null) mSearchQuery = savedInstanceState.getString(SEARCH_QUERY_TAG)
-        mImagesArrayList = ArrayList()
-        mRecyclerView = binding.rvImages
-        mImageAdapter = ImageAdapter(context!!, mImagesArrayList!!)
-        mRecyclerView!!.setHasFixedSize(true)
-        mLayoutManager = GridLayoutManager(context!!, 2)
-        mRecyclerView!!.layoutManager = mLayoutManager
-        mRecyclerView!!.adapter = mImageAdapter
+        if (savedInstanceState != null) mSearchQuery =
+            savedInstanceState.getString(SEARCH_QUERY_TAG)
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -86,8 +78,27 @@ class SearchFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
+        initRecyclerView()
         initSearchInputListener()
     }
+
+    private fun initRecyclerView() {
+        binding.imageList.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val lastPosition = layoutManager.findLastVisibleItemPosition()
+                if (lastPosition == adapter.itemCount-1){
+                    searchViewModel.loadNextPage()
+                }
+            }
+        })
+
+        searchViewModel.results.observe(viewLifecycleOwner, Observer { result ->
+//            adapter.submitList(result?.data)
+        })
+    }
+
+    fun navController() = findNavController()
 
     private fun initSearchInputListener() {
 
@@ -143,8 +154,8 @@ class SearchFragment : Fragment(),
     }
 
     private fun showAbout() {
-       // val aboutFragment = AboutFragment()
-       // aboutFragment.show(fragmentManager, "dialog")
+        // val aboutFragment = AboutFragment()
+        // aboutFragment.show(fragmentManager, "dialog")
     }
 
     /*override fun onItemClick(position: Int) {

@@ -9,6 +9,7 @@ import com.kamaltatyana.redgallery.AppExecutors
 import com.kamaltatyana.redgallery.R
 import com.kamaltatyana.redgallery.api.ApiResponse
 import com.kamaltatyana.redgallery.api.ApiSuccessResponse
+import com.kamaltatyana.redgallery.api.ImageSearchResponse
 import com.kamaltatyana.redgallery.api.PixabayService
 import com.kamaltatyana.redgallery.vo.Image
 import com.kamaltatyana.redgallery.vo.ListImage
@@ -22,31 +23,30 @@ class ImageRepository @Inject constructor(
         private val pixabayService: PixabayService,
         private val contextApp: Application
 ){
-        fun search(query: String): LiveData<Resource<List<ListImage>>> {
-                return object : NetworkBoundResource<List<ListImage>, ListImage>(appExecutors) {
+        fun search(query: String): LiveData<Resource<List<Image>>> {
+                return object : NetworkBoundResource<List<Image>, ImageSearchResponse>(appExecutors) {
 
-                        override fun createCall(): LiveData<ApiResponse<ListImage>> {
+                        override fun createCall(): LiveData<ApiResponse<ImageSearchResponse>> {
                                 return pixabayService.searchImage(
                                         contextApp.resources.getString(R.string.PIXABAY_API_KEY),
-                                        query
+                                        query,
+                                        "orange",
+                                        1
                                 )
                         }
 
-                        override fun processResponse(response: ApiSuccessResponse<ListImage>): ListImage {
+                        override fun processResponse(response: ApiSuccessResponse<ImageSearchResponse>)
+                                : ImageSearchResponse {
                                 return super.processResponse(response)
                         }
-                       /* override fun processResponse(response: ApiSuccessResponse<ListImage>) {
-                                val body = response.body
-                                return body
-                        }*/
 
+                        override fun shouldFetch(data: List<Image>?): Boolean = data == null
 
-                        override fun shouldFetch(data: List<ListImage>?): Boolean = data == null
-                        override fun loadFromDb(item: ListImage): LiveData<List<ListImage>> {
-                                val live = MutableLiveData<List<ListImage>>()
-                                val list = mutableListOf<ListImage>()
-                                list.add(0, item)
-                                live.value = list
+                        override fun loadFromDb(item: ImageSearchResponse): LiveData<List<Image>> {
+                                val live = MutableLiveData<List<Image>>()
+                                val list = mutableListOf<List<Image>>()
+                                list.add(0, item.hits)
+                                live.value = list[0]
                                 return live
                         }
 
