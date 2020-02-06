@@ -13,6 +13,8 @@ interface PixabayService {
     @GET("api/")
     fun searchImage(
         @Query("key") key: String,
-        @Query("q") query: String
-        ): LiveData<ApiResponse<ListImage>>
+        @Query("q") query: String,
+        @Query("colors") colors: String,
+        @Query("page") page: Int
+        ): LiveData<ApiResponse<ImageSearchResponse>>
 }
