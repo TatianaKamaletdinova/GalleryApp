@@ -23,15 +23,24 @@ class ImageRepository @Inject constructor(
         private val pixabayService: PixabayService,
         private val contextApp: Application
 ){
+
+      /*  fun searchNextPage(query: String): LiveData<Resource<Boolean>> {
+                val fetchNextSearchPageTask = FetchNextSearchPageTask(
+                        query = query,
+                        pixabayService = pixabayService
+                )
+        }*/
+
+
         fun search(query: String): LiveData<Resource<List<Image>>> {
                 return object : NetworkBoundResource<List<Image>, ImageSearchResponse>(appExecutors) {
 
                         override fun createCall(): LiveData<ApiResponse<ImageSearchResponse>> {
                                 return pixabayService.searchImage(
                                         contextApp.resources.getString(R.string.PIXABAY_API_KEY),
-                                        query,
-                                        "orange",
-                                        1
+                                        query
+                                       // "orange",
+                                     //   1
                                 )
                         }
 

@@ -33,8 +33,6 @@ class SearchFragment : Fragment(),
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val searchViewModel: SearchViewModel by viewModels { viewModelFactory }
-
     @Inject
     lateinit var appExecutors: AppExecutors
 
@@ -43,6 +41,8 @@ class SearchFragment : Fragment(),
     private var binding by autoCleared<SearchFragmentBinding>()
 
     var adapter by autoCleared<ImageListAdapter>()
+
+    private val searchViewModel: SearchViewModel by viewModels { viewModelFactory }
 
     private var mSearchQuery: String? = null //Строка запроса изображения
     private var searchView: SearchView? = null
@@ -72,13 +72,22 @@ class SearchFragment : Fragment(),
         if (savedInstanceState != null) mSearchQuery =
             savedInstanceState.getString(SEARCH_QUERY_TAG)
         setHasOptionsMenu(true)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
+
         initRecyclerView()
+
+        val rvAdapter = ImageListAdapter(
+            dataBindingComponent = dataBindingComponent,
+            appExecutors = appExecutors){}
+
+        binding.imageList.adapter = rvAdapter
+        adapter = rvAdapter
+
         initSearchInputListener()
     }
 
@@ -94,7 +103,7 @@ class SearchFragment : Fragment(),
         })
 
         searchViewModel.results.observe(viewLifecycleOwner, Observer { result ->
-//            adapter.submitList(result?.data)
+           adapter.submitList(result?.data)
         })
     }
 
@@ -112,7 +121,6 @@ class SearchFragment : Fragment(),
         searchView!!.setOnQueryTextListener(this@SearchFragment)
     }
 
-    //Обновление меню со строкой поиска
     override fun onPrepareOptionsMenu(menu: Menu) {
         if (mSearchQuery != null && !mSearchQuery!!.isEmpty()) {
             val query: String = mSearchQuery!!
@@ -157,24 +165,6 @@ class SearchFragment : Fragment(),
         // val aboutFragment = AboutFragment()
         // aboutFragment.show(fragmentManager, "dialog")
     }
-
-    /*override fun onItemClick(position: Int) {
-        val detailIntent = Intent(this, ImageActivity::class.java)
-        /**
-         * Передача позиции изображения в списке
-         */
-        val clickedItem = mImagesArrayList!![position]
-        detailIntent.putExtra(IMAGE_URL, clickedItem.getmImageUrl())
-        startActivity(detailIntent)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (mRequestQueue != null) {
-            mRequestQueue!!.cancelAll(request)
-        }
-    }
-*/
 
     companion object {
         /**
