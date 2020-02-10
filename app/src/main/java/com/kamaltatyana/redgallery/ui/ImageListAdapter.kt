@@ -36,7 +36,7 @@ class ImageListAdapter(
             false,
             dataBindingComponent
         )
-        binding.root.let {
+        binding.root.setOnClickListener {
             binding.repo.let {
                 repoClickCallback?.invoke(it!!)
             }

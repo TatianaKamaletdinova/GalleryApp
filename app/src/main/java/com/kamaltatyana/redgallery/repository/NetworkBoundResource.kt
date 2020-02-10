@@ -44,24 +44,6 @@ abstract class NetworkBoundResource<ResultType, RequestType>
                 }
             }
         }
-
-
-        /* val apiResponses = createCall().observeForever{
-             when (it) {
-                 is ApiSuccessResponse -> {
-                     appExecutors.mainThread().execute {
-                         val o = processResponse(it)
-                         result.addSource(loadFromDb(processResponse(it))){ data ->
-                             setValue(Resource.success(data))
-                         }
-                     }
-                 }
-                 is ApiErrorResponse -> {
-                     onFetchFailed()
-                     // result.addSource(apiResponse){ data -> setValue(Resource.error(response.errorMessage)) }
-                 }
-             }
-         }*/
     }
 
 
