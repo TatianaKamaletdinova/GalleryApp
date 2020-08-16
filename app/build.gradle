@@ -53,6 +53,7 @@ dependencies {
 
     implementation deps.retrofit.runtime
     implementation deps.retrofit.gson
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
 
     implementation deps.navigation.fragment_ktx
 

@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kamaltatyana.redgallery.AppExecutors
@@ -85,6 +86,7 @@ class SearchFragment : Fragment(),
             dataBindingComponent = dataBindingComponent,
             appExecutors = appExecutors){}
 
+        binding.imageList.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.imageList.adapter = rvAdapter
         adapter = rvAdapter
 

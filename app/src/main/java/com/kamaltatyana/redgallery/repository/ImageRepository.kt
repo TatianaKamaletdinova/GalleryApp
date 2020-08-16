@@ -36,16 +36,19 @@ class ImageRepository @Inject constructor(
                 return object : NetworkBoundResource<List<Image>, ImageSearchResponse>(appExecutors) {
 
                         override fun createCall(): LiveData<ApiResponse<ImageSearchResponse>> {
+                                val p = ""
                                 return pixabayService.searchImage(
                                         contextApp.resources.getString(R.string.PIXABAY_API_KEY),
-                                        query
-                                       // "orange",
+                                        query,
+                                        "orange"
                                      //   1
                                 )
                         }
 
                         override fun processResponse(response: ApiSuccessResponse<ImageSearchResponse>)
                                 : ImageSearchResponse {
+                                val p = response
+                                val pp =p
                                 return super.processResponse(response)
                         }
 

@@ -18,11 +18,12 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{repo.userImageURL}" />
+        android:text="@{repo.webformatURL}"
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/image_view"
-        app:imageUrl="@{repo.userImageURL}"
+        app:imageUrl="@{repo.webformatURL}"
         android:layout_width="match_parent"
         android:layout_height="@dimen/layout_height"
         android:layout_margin="2dp"

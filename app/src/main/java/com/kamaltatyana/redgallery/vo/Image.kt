@@ -21,5 +21,4 @@ data class Image(
     val favorites : Int,
     val imageSize : Int,
     val previewWidth : Int,
-    val userImageURL : String,
-    val previewURL : String)
+    val userImageURL : String)
